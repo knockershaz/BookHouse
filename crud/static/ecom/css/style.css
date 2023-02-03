@@ -1,0 +1,14 @@
+body{
+    background-color: white;
+}
+
+.blogField{
+    background-color: rgb(169, 147, 138);
+    border-radius:10px;
+    margin:50px;
+    padding: 30px;
+    color:beige;
+}
+a{
+    color: white !important;
+}

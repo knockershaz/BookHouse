@@ -1,0 +1,44 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/ecom/css/style.css' %}">
+    <title>Sign Up</title>
+    {% include 'navbar.html' %}
+  </head>
+  <body>
+    <div class="container col-sm-10">
+        <h1 class="my-5 mx-5">Sign Up</h1>
+        {% if messages %}
+        {% for message in messages %}
+        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>   
+        {% endfor %}
+        {% endif %}
+        <form method="POST">
+          {% csrf_token %}
+          {% for fm in form %}
+          <div class="form-group my-2">
+            <b>{{fm.label_tag}}</b> {{fm}} {{fm.errors|striptags}}
+        </div>
+          {% endfor %}
+          <div class="container text-center">
+            <input type="submit" class="btn btn-primary my-2" value="Register">
+          </div>
+          {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+          <p class="alert alert-danger my-3">{{error}}</p>
+          {% endfor %}
+          {% endif %}
+        </form>
+    </div>
+    
+
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
