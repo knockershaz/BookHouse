@@ -1,6 +1,6 @@
 <nav class="navbar bg-primary navbar-dark navbar-expand-lg ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">ApnaMarket</a>
+      <a class="navbar-brand" href="/"> <h4>Second Hand</h4> <h6 class="text-center">Book Store </h6></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -21,24 +21,26 @@
             <a class="nav-link {%if request.path == "/about/"%} active {% endif %}" href="/about/">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {%if request.path == "/product/"%} active {% endif %}" href="/product/">Produts</a>
+            <a class="nav-link {%if request.path == "/product/"%} active {% endif %}" href="/product/">Books</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {%if request.path == "/contact/"%} active {% endif %}" href="/contact/">Contact</a>
+            <a class="nav-link {%if request.path == "/contact/"%} active {% endif %}" href="/contact/">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {%if request.path == "/admin/"%} active {% endif %}" href="/admin/">Admin Panel</a>
+            <a class="nav-link {%if request.path == "/admin/"%} active {% endif %} " href="/admin/">
+              <i class="fa-solid fa-user"></i>
+            </a>
           </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link {%if request.path == "/dashboard/"%} active {% endif %}" href="/dashboard/">Dashboard</a>
           </li>
-          <div style="position: relative; left:100%;">
+          <div style="position: relative; left:125%;">
             <button type="button" class="btn btn-success py-0 me-2"><a class="nav-link {%if request.path == "/logout/"%} active {% endif %}" href="/logout/">Log out</a></button>
           </div>
         </li>
         {% else %}
-            <div style="position: relative; left:100%;">
+            <div style="position: relative; left:125%;">
               <button type="button" class="btn btn-success py-0 me-2"><a class="nav-link {%if request.path == "/signup/"%} active {% endif %}" href="/signup/">Sign Up</a></button>
             <button type="button" class="btn btn-success py-0"><a class="nav-link {%if request.path == "/dashboard/"%} active {% endif %}" href="/signin/">Log in</a></button>
             </div>

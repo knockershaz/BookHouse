@@ -1,5 +1,6 @@
 body{
     background-color: white;
+    font-family: 'Itim', cursive;
 }
 
 .blogField{
@@ -8,7 +9,4 @@ body{
     margin:50px;
     padding: 30px;
     color:beige;
-}
-a{
-    color: white !important;
 }

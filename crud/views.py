@@ -4,18 +4,17 @@ from .forms import SignUpForm,LoginForm,PostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 
-def homepage(request):
+def home(request):
     posts = Post.objects.all()
     return render(request,'index.html',{'posts' : posts})
-
-def home(request):
-    return render(request,'index.html')
 def contact(request):
     return render(request,'contact.html')
 def about(request):
     return render(request,'about.html')
 def product(request):
     return render(request,'products.html')
+def homepage(request):
+    return render(request,'homepage.html')
     
 def dashboard(request):
     if request.user.is_authenticated:

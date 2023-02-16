@@ -13,12 +13,13 @@
     crossorigin="anonymous"
     />
     <link rel="stylesheet" href=" {% static '/ecom/css/style.css' %} ">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rowdies&display=swap" rel="stylesheet">
   </head>
   <body>
       {% include 'Navbar.html' %}
       <div class="col-sm-10">
-
-        <h1 class="my-5 mx-5">Home</h1>
   
         {% for post in posts %}
   

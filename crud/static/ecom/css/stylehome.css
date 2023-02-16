@@ -1,0 +1,24 @@
+.upper-section::before{
+  content: '';
+  background: url('book.jpeg');
+  height: 85%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  position:absolute;
+  opacity: 0.65;
+}
+body{
+  color: rgb(0, 0, 0);
+  font-family: 'Itim', cursive;
+}
+.box
+{
+  text-align: center;
+}
+h1{
+  font-size: 65px;
+}
+h2{
+  font-size: 45px;
+}
