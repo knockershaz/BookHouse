@@ -35,12 +35,12 @@
           <li class="nav-item">
             <a class="nav-link {%if request.path == "/dashboard/"%} active {% endif %}" href="/dashboard/">Dashboard</a>
           </li>
-          <div style="position: relative; left:125%;">
+          <div style="position: relative; left:145%;">
             <button type="button" class="btn btn-success py-0 me-2"><a class="nav-link {%if request.path == "/logout/"%} active {% endif %}" href="/logout/">Log out</a></button>
           </div>
         </li>
         {% else %}
-            <div style="position: relative; left:125%;">
+            <div style="position: relative; left:145%;">
               <button type="button" class="btn btn-success py-0 me-2"><a class="nav-link {%if request.path == "/signup/"%} active {% endif %}" href="/signup/">Sign Up</a></button>
             <button type="button" class="btn btn-success py-0"><a class="nav-link {%if request.path == "/dashboard/"%} active {% endif %}" href="/signin/">Log in</a></button>
             </div>
