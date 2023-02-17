@@ -10,3 +10,7 @@ body{
     padding: 30px;
     color:beige;
 }
+.book{
+    display: flex;
+    
+}
