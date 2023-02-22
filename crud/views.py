@@ -4,6 +4,44 @@ from .forms import SignUpForm,LoginForm,PostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 
+import mysql.connector as sql
+un=''
+fn=''
+ln=''
+em=''
+pwd=''
+# Create your views here.
+
+def user_signup(request):
+    global un,fn,ln,em,pwd
+    if request.method == 'POST':
+        m=sql.connect(host="localhost",user="root",passwd="#Saquib12",database='ApnaMarket')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key=='username':
+                un=value
+            if key=="first_name":
+                fn=value
+            if key=="last_name":
+                ln=value
+            if key=="email":
+                em=value
+            if key=="password1":
+                pwd=value
+        
+        
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            messages.success(request, 'Registration successful')
+            c="insert into users Values('{}','{}','{}','{}','{}')".format(un,fn,ln,em,pwd)
+            cursor.execute(c)
+            m.commit()
+            form.save()
+    else:
+            form = SignUpForm()
+    return render(request,'signup.html',{'form':form})
+
 def product(request):
     posts = Post.objects.all()
     return render(request,'products.html',{'posts' : posts})
@@ -27,16 +65,29 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+# def user_login(request):
+#     global em,pwd
+#     if request.method=="POST":
+#         m=sql.connect(host="localhost",user="root",passwd="vivek",database='website')
+#         cursor=m.cursor()
+#         d=request.POST
+#         for key,value in d.items():
+#             if key=="email":
+#                 em=value
+#             if key=="password":
+#                 pwd=value
+        
+#         c="select * from users where email='{}' and password='{}'".format(em,pwd)
+#         cursor.execute(c)
+#         t=tuple(cursor.fetchall())
+#         if t==():
+#             form = LoginForm()
+#             return render(request, 'login.html',{'form':form})
+#         else:
+#             return HttpResponseRedirect('/dashboard/')
 
-def user_signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            messages.success(request, 'Registration successful')
-            form.save()
-    else:
-            form = SignUpForm()
-    return render(request,'signup.html',{'form':form})
+#     return HttpResponseRedirect('/dashboard/')
+
 
 def user_login(request):
  if not request.user.is_authenticated:
@@ -45,9 +96,22 @@ def user_login(request):
       if form.is_valid():
        uname = form.cleaned_data['username']
        upass = form.cleaned_data['password']
-       user = authenticate(username=uname,password=upass)
-       if user is not None:
-        login(request,user)
+    #    user = authenticate(username=uname,password=upass)
+       m=sql.connect(host="localhost",user="root",passwd="#Saquib12",database='ApnaMarket')
+       cursor=m.cursor()
+    #    d=request.POST
+    #    for key,value in d.items():
+    #         if key=="username":
+    #             un=value
+    #         if key=="password":
+    #             pwd=value
+        
+       c="select * from users where username='{}' and pass='{}'".format(uname,upass)
+       cursor.execute(c)
+       print("saquib")
+       t=tuple(cursor.fetchall()) 
+       if t!=():
+        login(request,t)
         messages.success(request,'Logged in successfully')
         return HttpResponseRedirect('/dashboard/')
     else:
@@ -55,6 +119,24 @@ def user_login(request):
     return render(request, 'login.html',{'form':form})
  else:
   return HttpResponseRedirect('/dashboard/')
+
+# def user_login(request):
+#  if not request.user.is_authenticated:
+#     if request.method == 'POST':
+#       form = LoginForm(request=request,data=request.POST)
+#       if form.is_valid():
+#        uname = form.cleaned_data['username']
+#        upass = form.cleaned_data['password']
+#        user = authenticate(username=uname,password=upass)
+#        if user is not None:
+#         login(request,user)
+#         messages.success(request,'Logged in successfully')
+#         return HttpResponseRedirect('/dashboard/')
+#     else:
+#       form = LoginForm()
+#     return render(request, 'login.html',{'form':form})
+#  else:
+#   return HttpResponseRedirect('/dashboard/')
 
 def addpost(request):
     if request.user.is_authenticated:
