@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ApnaMarket',
         'USER': 'root',
-        'PASSWORD':'#Saquib12',
+        'PASSWORD':'15081947',
         'HOST':'localhost',
         'PORT':'3306'
         }

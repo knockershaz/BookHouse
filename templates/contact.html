@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About{% endblock title%}
+{% block title %}Contact Us{% endblock title%}
 
 {% block body%}
 <div class="alert alert-success alert-dismissible fade" role="alert" id="success">
@@ -12,7 +12,7 @@
     <strong>Oop's</strong> Fill the credentials carefully
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-<div class="container">
+<div class="container my-2">
     <h1>Contact Us</h1>
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
@@ -39,7 +39,7 @@
         <label for="message" class="form-label">Your Feedback</label>
         <textarea class="form-control" id="message" rows="3"></textarea>
     </div>
-    <button class="btn btn-primary btnsuccess" id="submit">Submit</button>
+    <button class="btn btn-primary btnsuccess my-5" id="submit">Submit</button>
 </div>
 <script src="{% static '/ecom/js/Form.js' %}"></script>
 {% endblock body%}
