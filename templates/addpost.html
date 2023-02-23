@@ -16,7 +16,7 @@
         <h3 class="my-5 mx-5"><a href="/dashboard/">Dashboard</a> / Add Post</h3>
 
         <div class="container mx-5">
-          <form action="" method="POST">
+          <form action="" method="POST"enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
             {{form.media}}

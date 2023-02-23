@@ -13,15 +13,19 @@
     crossorigin="anonymous"
     />
     <link rel="stylesheet" href=" {% static '/ecom/css/style.css' %} ">
+    <link rel="stylesheet" href=" {% static '/ecom/css/product.css' %} ">
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rowdies&display=swap" rel="stylesheet">
   </head>
   <body>
       {% include 'Navbar.html' %}
+      <center><h1 style="    font-size: 3.5rem;
+        margin-top: 40px;
+        font-family: fantasy;"><u>Books</u></h1></center>
       <div class="container" style="padding: 15px;">
   
-        {% for post in posts %}
+        {% comment %} {% for post in posts %}
           <div class="card" style="width: 18rem;padding-top:10px;">
             {% if post.image %}
                   <img src="{{post.image.url}}" style="width: 200px; height: 200px; align-self: center;
@@ -34,7 +38,47 @@
             </div>
             </div>
         </div>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
+        {% comment %} {% for post in posts %}
+        <div class="grid-wrapper">
+          {% if forloop.counter|divisibleby:3 %}
+            <div class="grid-item">
+              <h5 class="card-title">{{post.title}}</h5>
+              {% if post.image %}
+              <img src="{{post.image.url}}" style="width: 200px; height: 200px; align-self: center;
+                  border-radius: 12px;">
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %} {% endcomment %}
+      <div style="display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 250px;
+      grid-gap: 1rem;
+      grid-auto-flow: row;
+      margin: 45px;">
+        {% for post in posts %}
+          <div style="display: flex;
+          border:2px solid black;
+          border-radius:12px;
+          justify-content: center;
+          align-items: center;
+          ">
+            {% if post.image %}
+                  <img src="{{post.image.url}}" style="width: 200px; height: 100%; align-self: center;
+                  border-radius: 12px;">
+                {% endif %}
+          <div class="card-body" style="text-align: center;
+                                        height: 100%;
+                                        padding: 0px 10px;">
+            <h5 class="card-title" style="font-weight:600">{{post.title}}</h5>
+            <p class="card-text">{{post.desc|safe}}</p>
+            <div><a href="#" class="btn btn-primary" style="">Add to Cart</a></div>
+          </div>  
+          </div>
+        {% endfor %}
+      </div>
     </div>
   {% include 'footer.html' %}
     <script

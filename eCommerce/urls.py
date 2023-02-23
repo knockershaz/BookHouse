@@ -31,6 +31,7 @@ urlpatterns = [
     path('signup/',views.user_signup,name="user_signup"),
     path('signin/',views.user_login,name="user_login"),
     path('dashboard/',views.dashboard,name="dashboard"),
+    path('cart/',views.cart,name="cart"),
     path('addpost/',views.addpost,name="addpost"),
     path('updatepost/<int:id>',views.updatepost,name="updatepost"),
     path('deletepost/<int:id>',views.deletepost,name="deletepost"),
