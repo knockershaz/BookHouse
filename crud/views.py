@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse,HttpResponseRedirect
-from .models import Post
+from .models import Post,Order
 from .forms import SignUpForm,LoginForm,PostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -51,6 +51,15 @@ def about(request):
     return render(request,'about.html')
 def homepage(request):
     return render(request,'homepage.html')
+
+def addfav(request):
+    if request.method=="POST":
+        book_title = request.POST.get('title')
+        order_book=Order.objects.filter(title=book_title).get()
+        context = {
+
+        }
+        return render(request,'cart.html',context)
     
 def dashboard(request):
     if request.user.is_authenticated:
@@ -63,10 +72,10 @@ def dashboard(request):
 
 def cart(request):
     if request.user.is_authenticated:
-     posts = Post.objects.all()
+     Orders = Order.objects.all()
      user = request.user
      full_name = user.get_full_name()
-     return render(request, 'cart.html',{'posts':posts,'full_name':full_name})
+     return render(request, 'cart.html',{'Orders':Orders})
     else:
       return HttpResponseRedirect('/login/')
 
