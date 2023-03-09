@@ -22,16 +22,15 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control'}))
     password = forms.CharField(label=_("Password"),strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'form-control'}))
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['title','desc','image']
-        labels = {'title' : 'Title', 'desc' : 'Description',}
-        widgets = {'title' : forms.TextInput(attrs={'class' : 'form-control'}),'desc':forms.Textarea(attrs={'class':'form-control'}),}
 class PostForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['title','cost']
         labels = {'title' : 'Title', 'cost' : 'Cost',}
         widgets = {'title' : forms.TextInput(attrs={'class' : 'form-control'}),'cost':forms.Textarea(attrs={'class':'form-control'}),}
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','desc','image']
+        labels = {'title' : 'Title', 'desc' : 'Description',}
+        widgets = {'title' : forms.TextInput(attrs={'class' : 'form-control'}),'desc':forms.Textarea(attrs={'class':'form-control'}),}

@@ -74,7 +74,11 @@
                                         padding: 0px 10px;">
             <h5 class="card-title" style="font-weight:600">{{post.title}}</h5>
             <p class="card-text">{{post.desc|safe}}</p>
-            <a href="#" class="btn btn-primary" style="">Add to Cart</a>
+            <div id="cart-section">
+              <a href="{%url 'addcart' post.title %}">
+                <button class ="btn btn-primary" value="Add to cart">Add to cart</button>
+              </a>
+            </div>
             {% comment %} <button class="btn btn-primary" id="{{ post.title }}" name="{{ post.title }}" value="Add to cart"></button> {% endcomment %}
           </div>  
           </div>

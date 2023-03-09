@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse,HttpResponseRedirect
-from .models import Post,Order
+from django.shortcuts import get_list_or_404, get_object_or_404
+from .models import Post,Order,get_absolute_url
 from .forms import SignUpForm,LoginForm,PostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -10,6 +11,10 @@ fn=''
 ln=''
 em=''
 pwd=''
+t=''
+des=''
+img=''
+
 # Create your views here.
 
 def user_signup(request):
@@ -72,10 +77,15 @@ def dashboard(request):
 
 def cart(request):
     if request.user.is_authenticated:
-     Orders = Order.objects.all()
-     user = request.user
-     full_name = user.get_full_name()
-     return render(request, 'cart.html',{'Orders':Orders})
+        m=sql.connect(host="localhost",user="root",password="Bapan@2002",database='ApnaMarket')
+        cursor=m.cursor()
+        c="select*from product where fav ='true';"
+        cursor.execute(c)
+        Orders=tuple(cursor.fetchall())
+        # Orders = Order.objects.all()
+        user = request.user
+        full_name = user.get_full_name()
+        return render(request, 'cart.html',{'Orders':Orders})
     else:
       return HttpResponseRedirect('/login/')
 
@@ -167,18 +177,53 @@ def user_login(request):
 #     else:
 #         return HttpResponseRedirect('/login/')
 
+
+# def cart_post(request,id):
+#     post=get_object_or_404(Post,id=id)
+#     if post.cart.filter(id=request.user.id).exists():
+#         post.cart.remove(request.user)
+#     else:
+#         post.cart.add(request.user)
+#     return HttpResponseRedirect(post.get_absoulate_url())    
+
 def addpost(request):
     if request.user.is_authenticated:
+        global t,des,img
         if request.method == 'POST':
             form = PostForm(request.POST,request.FILES)
             if form.is_valid():
-                form.save()
-                form = PostForm()
+                # form.save()
+                m=sql.connect(host="localhost",user="root",password="Bapan@2002",database='ApnaMarket')
+                cursor=m.cursor()
+                d=request.POST
+                img=form.cleaned_data.get("image")
+                for key,value in d.items():
+                    if key=="title":
+                        t=value
+                    if key=="desc":
+                        des=value
+                    # if key=="image":
+                    #     img=value
+                # c="insert into users Values('{}','{}','{}','{}','{}')".format(un,fn,ln,em,pwd)        
+                c="INSERT into product Values('{}','{}','{}','false');".format(t,des,img)
+                cursor.execute(c);
+                m.commit();
+                posts = Post.objects.all()
+                return render(request,'products.html',{'posts' : posts})
+                # form = PostForm()
         else:
             form = PostForm()
         return render(request,'addpost.html',{'form':form})
     else:
         return HttpResponseRedirect('/login/')
+
+def addcart(request,title):
+            m=sql.connect(host="localhost",user="root",password="Bapan@2002",database='ApnaMarket')
+            cursor=m.cursor()
+            c="UPDATE product SET fav='true' WHERE title = '{}';".format(title)
+            cursor.execute(c)
+            posts = Post.objects.all()
+            return render(request,'products.html',{'posts' : posts})
 
 def updatepost(request,id):
     if request.user.is_authenticated:

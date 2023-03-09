@@ -40,13 +40,13 @@
           <div style="position: relative; left:145%;">
             <button type="button" class="btn btn-success py-0 me-2"><a class="nav-link {%if request.path == "/logout/"%} active {% endif %}" href="/logout/">Log out</a></button>
           </div>
-          <div style="position: relative; left:147%;">
+          {% comment %} <div style="position: relative; left:147%;">
             <li class="nav-item">
               <a class="nav-link {%if request.path == "/cart/"%} active {% endif %} " href="/cart/">
                 <i class="fa-solid fa-cart-shopping"></i>
               </a>
             </li>
-          </div>
+          </div> {% endcomment %}
         </li>
         {% else %}
             <div style="position: relative; left:145%;">

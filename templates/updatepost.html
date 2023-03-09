@@ -16,9 +16,11 @@
         <h3 class="my-5 mx-5">Dashboard / Update Post</h3>
 
         <div class="container mx-5">
-          <form action="" method="POST">
+          <form action="" method="POST"enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
+            {{form.media}}
+            {{ desc|safe }}
             <input type="submit" value="Update" class="btn btn-success">
             <a href="{% url 'dashboard' %}" class="btn btn-danger">Cancel</a>
           </form>

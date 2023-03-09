@@ -33,6 +33,7 @@ urlpatterns = [
     path('dashboard/',views.dashboard,name="dashboard"),
     path('cart/',views.cart,name="cart"),
     path('addpost/',views.addpost,name="addpost"),
+    path('addcart/<str:title>',views.addcart,name="addcart"),
     path('updatepost/<int:id>',views.updatepost,name="updatepost"),
     path('deletepost/<int:id>',views.deletepost,name="deletepost"),
     path('logout/',views.user_logout,name="logout"),
